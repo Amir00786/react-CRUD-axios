@@ -11,7 +11,7 @@ export default function UseReduce() {
         return state;
     }, 0)
     return (
-        <div className="w-2/3 mx-auto">
+        <div>
             <h1 className="text-2xl font-bold">UseReduce</h1>
             <p className="text-2xl font-bold">Count: {count}</p>
             <button onClick={() => dispatch("increment")}>Increment</button>
