@@ -12,6 +12,11 @@ export default function UseState() {
   )
 }
 
+// useState React ka hook hai jo kisi component ke andar state (yaani data jo change ho sakta hai) ko store aur manage karne ke liye use hota hai.
+
+// State ek tarah ka variable hota hai jo React component ke andar hota hai, aur jab iska value change hota hai to component 
+// re-render hota hai (UI dobara update hota hai)
+
 
 // In react, state refers to an object that holds data and information about the component. State is managed within the component 
 // (just like a variables declared in a function). However, unlike regular variables, when state changes React re-renders the component to reflect these 

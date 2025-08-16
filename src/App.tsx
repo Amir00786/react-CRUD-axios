@@ -4,7 +4,8 @@ import UseEffect from './basic-hooks/useeffect'
 import UseReduce from './additional-hooks/usereduce'
 import UseRef from './additional-hooks/useref'
 import UseState from './basic-hooks/usestate'
-import UseInsertionEffect from './externalstore-sync-hooks/useinsertioneffect'
+import UseMemo from './basic-hooks/usememo'
+// import UseInsertionEffect from './externalstore-sync-hooks/useinsertioneffect'
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
         <UseReduce />
         <UseRef />
         <UseContext />
-        <UseInsertionEffect />
+        {/* <UseInsertionEffect /> */}
+        <UseMemo />
       </div>
     </>
   )
