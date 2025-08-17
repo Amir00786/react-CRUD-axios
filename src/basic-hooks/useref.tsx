@@ -65,16 +65,10 @@ export default function UseRefPreviousValue() {
 // useRef ek reference object return karta hai ({ current: ... }).
 // Humne inputRef ko <input> ke ref prop me diya → iska matlab inputRef.current us input ka direct DOM element hoga.
 // Jab button click hota hai → inputRef.current.focus() call hoti hai → input me cursor chala jata hai automatically.
-
 // Perfect 👌 ab mai aapko useRef ka dusra example deta hoon jisme hum previous value track karenge.
 // useRef ka ek bada use-case ye hota hai ke ye value ko re-render ke baad bhi hold karke rakhta hai bina component ko dobara render kiye.
-
 //🔑 Difference between re-render aur reload
-
 // Re-render 👉 React apne component ko dobara render karta hai jab state/props change hote hain.
-
 // Is waqt useRef ki value wipe nahi hoti, ye wahi rehti hai.
-
 // Reload (page refresh) 👉 Jab aap browser ka page reload karte ho to poora React app dobara start hota hai.
-
 // Matlab saara memory, state, ref reset ho jaata hai (kyunki component dubara se scratch se mount hota hai).  
