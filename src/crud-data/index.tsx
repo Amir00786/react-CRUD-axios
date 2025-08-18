@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { deletePost, getPost } from "../api/PostApi";
+import { Form } from "./form";
 
 export const CrudData = () => {
 
@@ -33,6 +34,9 @@ export const CrudData = () => {
 
     return (
         <div>
+            <div>
+                <Form />
+            </div>
             <ul className="grid grid-cols-3 gap-4">
                 {
                     data.map((curElem) => {
