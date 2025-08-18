@@ -5,19 +5,19 @@ import { Form } from "./form";
 export const CrudData = () => {
 
     const [data, setData] = useState([]);
+    const [updateDataApi, setUpdateDataApi] = useState(null);
+
+    // get post data
     const getPostData = async () => {
         const res = await getPost();
         // console.log(res.data);
         setData(res.data);
     }
-
-
     useEffect(() => {
         getPostData();
     }, []);
 
     // delete post
-
     const handleDeletePost = async (id: number) => {
         try {
             const res = await deletePost(id);
@@ -32,10 +32,18 @@ export const CrudData = () => {
         }
     }
 
+    // update post
+    const handleUpdatePost = (curElem: any) => setUpdateDataApi(curElem);
+
     return (
         <div>
             <div>
-                <Form />
+                <Form
+                    data={data}
+                    setData={setData}
+                    updateDataApi={updateDataApi}
+                    setUpdateDataApi={setUpdateDataApi}
+                />
             </div>
             <ul className="grid grid-cols-3 gap-4">
                 {
@@ -49,7 +57,7 @@ export const CrudData = () => {
                                     <p>Body: {body}</p>
                                 </div>
                                 <div className="flex gap-4">
-                                    <button className="bg-blue-600 w-[40%] cursor-pointer hover:bg-blue-600/80 hover:shadow-[0px_7px_19px_0px_rgb(37,99,235)] transition-all duration-500 text-white px-4 py-2 rounded-md">
+                                    <button onClick={() => handleUpdatePost(curElem)} className="bg-blue-600 w-[40%] cursor-pointer hover:bg-blue-600/80 hover:shadow-[0px_7px_19px_0px_rgb(37,99,235)] transition-all duration-500 text-white px-4 py-2 rounded-md">
                                         Edit
                                     </button>
                                     <button onClick={() => handleDeletePost(id)} className="bg-red-600 w-[40%] cursor-pointer hover:bg-red-600/80 hover:shadow-[0px_7px_19px_0px_rgb(220,38,38)] transition-all duration-500 text-white px-4 py-2 rounded-md">

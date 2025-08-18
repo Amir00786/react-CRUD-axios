@@ -14,12 +14,12 @@ export const getPostById = (id: number) => {
     return api.get(`/posts/${id}`);
 }
 
-// post method
-export const createPost = (data: any) => {
+// post method (create)
+export const PostData = (data: any) => {
     return api.post("/posts", data);
 }
 
-// put method
+// put patch method (update)
 export const updatePost = (id: number, data: any) => {
     return api.put(`/posts/${id}`, data);
 }
