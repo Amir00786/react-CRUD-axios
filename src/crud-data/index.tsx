@@ -5,7 +5,7 @@ import { Form } from "./form";
 export const CrudData = () => {
 
     const [data, setData] = useState([]);
-    const [updateDataApi, setUpdateDataApi] = useState(null);
+    const [updateDataApi, setUpdateDataApi] = useState({});
 
     // get post data
     const getPostData = async () => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PostData } from "../api/PostApi";
+import { PostData, updateData, updatePost } from "../api/PostApi";
 
 export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }: { data: any, setData: any, updateDataApi: any, setUpdateDataApi: any }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -9,6 +9,8 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }: { data:
         title: "",
         body: "",
     });
+
+    let isEmpty = Object.keys(updateDataApi).length === 0;
     useEffect(() => {
         updateDataApi && setAddData({
             title: updateDataApi.title || "",
@@ -29,7 +31,6 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }: { data:
             console.log("res", res);
             if (res.status === 201) {
                 setData([...data, res.data]);
-                // Reset form after successful submission
                 setAddData({
                     title: "",
                     body: "",
@@ -42,13 +43,39 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }: { data:
             setIsLoading(false);
         }
     }
+
+    // update post
+    const updatePostData = async () => {
+        try {
+            const res = await updateData(updateDataApi.id, addData);
+            console.log("res", res);
+            if (res.status === 200) {
+                setData((prev: any) => {
+                    return prev.map((curElem: any) => {
+                        return curElem.id === res.data.id ? res.data : curElem;
+                    })
+                })
+                setAddData({
+                    title: "",
+                    body: "",
+                });
+                setUpdateDataApi({});
+            }
+        } catch (error) {
+            console.error("Error updating post:", error);
+            alert("Failed to update post. Please try again.");
+        }
+    }
+
+    // form submission
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Only submit if both fields have values
-        if (addData.title.trim() && addData.body.trim()) {
+        const action = e.nativeEvent.submitter.value;
+        addPostData();
+        if (action === "Add") {
             addPostData();
-        } else {
-            alert("Please fill in both title and body fields.");
+        } else if (action === "Edit") {
+            updatePostData();
         }
     }
 
@@ -87,9 +114,10 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }: { data:
                 <button
                     type="submit"
                     disabled={isLoading}
+                    value={isEmpty ? "Add" : "Edit"}
                     className="bg-blue-600 text-white px-4 py-2 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-blue-700"
                 >
-                    {isLoading ? "Adding..." : "Add Data"}
+                    {isEmpty ? "Add" : "Edit"}
                 </button>
             </form>
         </div>
